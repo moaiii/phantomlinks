@@ -1,0 +1,122 @@
+<html ng-app="LinksApp">
+<html>
+<head>
+	<title>Phantom Links</title>
+	<link rel="icon" href="images/logo.png">
+	<!-- library javascript -->
+	<script type="text/javascript" src="javascripts/lib/angular.min.js"></script>	
+	<script type="text/javascript" src="javascripts/lib/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="javascripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="javascripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="javascripts/lib/dataTables.min.js"></script>
+	<!-- angular controller -->
+	<script type="text/javascript" src="javascripts/app.js"></script>
+	<!-- <script type="text/javascript" src="javascripts/app-compiled.js"></script> -->
+	<!-- css styles -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/fa/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/simplePagination.css">
+	<!-- fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Space+Mono' rel='stylesheet' type='text/css'>
+</head>
+
+<body ng-controller="LinksController">
+
+	<!-- intro banner -->
+	<div class="container" id="header">
+			<h1 id="TitleHeader">Phantom Links</h1>
+	<!-- Add links form -->
+		<form name="submitForm">
+			<!-- <h2>Enter a link URL</h2> -->
+		<!-- Input fields -->
+			<input class="form-control" type="url" placeholder="URL..." name="input" ng-model="url.text" required></form><br>	
+			<input class="form-control" type="text" placeholder="Title..." ng-model="title.text" required>
+		<!-- button will show only if url is valid -->
+			<button class="btn btn-info url-submit" ng-click="addLink(url.text, title.text)" ng-show="!submitForm.$error.url && !submitForm.$error.required" data-toggle="modal" data-target="#myModal">Add Link!</button>	
+		<!-- show error message ONLY IF the url is invalid -->
+			<div role="alert">
+				<h4 class="urlAlert" ng-show="submitForm.input.$error.url">
+				Oops! This is not a valid url link!</h4>
+			</div>
+		</form>
+	</div>
+
+
+	<!-- display the list of links -->
+	<div class="container" id="linksList">
+	<!-- angular filter on the $scope.linksList [] array -->
+		<input id="searchBox" ng-model="searchText" placeholder="Filter Links....">
+	<!-- loop through data in $scope.linksList [] array -->	
+		<table id="linksTable" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th class="col-xs-4 col-lg-4 tableHead">Name</th>
+					<th class="col-xs-4 col-lg-4 tableHead">URL</th>
+					<th class="col-xs-2 col-lg-2 tableHead tableDate">Date</th>
+					<th class="col-xs-1 col-lg-1 tableHead">Edit</th>
+					<th class="col-xs-1 col-lg-1 tableHead">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="link in linksList | filter:searchText">
+					<th class="col-xs-4 col-lg-4">{{link.title}}</th>
+					<th class="col-xs-4 col-lg-4"><a ng-href="{{link.url}}" target="blank">{{link.url}}</a></th>
+					<th class="col-xs-2 col-lg-2">{{link.time}}</th>
+					<th class="col-xs-1 col-lg-1">
+							<i ng-click="editLink(link.url)" data-toggle="modal" data-target="#editModal" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</th>
+					<th class="col-md-1 col-lg-1">
+							<i ng-click="deleteLink(link.url)" class="fa fa-trash-o" aria-hidden="true" data-toggle="modal" data-target="#deleteModal"></i>
+					</th>
+				</tr>	
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Modal URL SUCCESS SUBMIT Window-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <p class="alert alert-success">
+	        	<span style="font-weight:bolder;">{{url.text}}</span> has been successfully added to your favourite links!!!
+	        </p>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Modal EDIT ENTRY Window -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+			<div ng-show="editing">
+				<h4>Editing the {{editing.title}} URL:</h4>
+				<input class="linkedit" ng-model="editing.url">
+			</div>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Done Editing</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Modal DELETED Window-->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <p class="alert alert-warning">
+	        	deleted!!!
+	        </p>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+</body>
+</html>

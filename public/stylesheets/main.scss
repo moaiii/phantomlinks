@@ -1,0 +1,118 @@
+/**
+ *	CSS Style Sheet
+ *	Phantom - Developer project
+ *	For: Matt Booy @ Phantom- london;
+ *	Created by: Christopher Melville
+ *	Date: July 2016
+ *	christopher.melville@me.com
+ */
+
+
+/**
+ *	SASS - GLOBAL VARIABLES
+ */
+	
+	$black: rgb(23,23,23);
+	$white: rgb(240,240,240);
+	$fancyFont: 'Righteous', cursive;
+	$normalFont: 'Space Mono', ;
+
+/**
+ *	GENERAL DOC STYLES
+ */
+
+body {
+	background-color: $black;
+	font-family: $normalFont;
+}
+
+h1, h2 {
+	text-align: center;
+	color: white;
+}
+
+input {
+	display: block;
+	margin: 0 auto;
+} 
+
+li {
+	list-style: none;
+	text-decoration: none;
+}
+
+.container {
+	width: 100%;
+	height: 200px;
+	text-align:center;
+}
+
+/**
+ *	PAGE INPUT CUSTOM STYLES
+ */
+
+
+#TitleHeader {
+	font-family: $fancyFont;
+	font-size: 55px;
+}
+
+#searchBox {
+	margin: 25px auto 25px auto;
+}
+
+.container#header {
+	height: 300px;
+	background-image: url(../images/bg.jpg);
+} 
+
+.form-control {
+	width: 50%;
+}
+
+.urlAlert {
+	text-align: center;
+	color: red;
+	font-weight: bolder;
+}
+
+.url-submit {
+	height: 50px;
+	width: 150px;
+	margin: 25px auto;
+}
+
+.linkedit {
+	width: 350px;
+}
+
+/**
+ *	TABLE STYLES
+ */
+
+ .container#linksList {
+ 	margin-bottom: 400px;
+ }
+
+ .tableHead {
+ 	color: $white;
+ 	font-weight: bolder;
+ 	border-bottom: 1px solid $white;
+ }
+
+ th {
+ 	font-size: 12px;
+ 	a {
+ 		i {
+ 			color: $white;
+ 			cursor: pointer;
+ 		}
+ 	}
+ }
+
+.paginate_button {
+	padding-top: 50px;
+	padding: 10px;
+	color: $white;
+	cursor: pointer;
+}
